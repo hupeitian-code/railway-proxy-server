@@ -2,6 +2,10 @@
   "name": "student-grade-proxy-server",
   "version": "1.0.0",
   "description": "代理服務器用於存取 SharePoint Excel 檔案",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SaintPauloSchool/railway-proxy-server.git"
+  },
   "main": "dist/server.js",
   "scripts": {
     "dev": "ts-node src/server.ts",
@@ -38,4 +42,5 @@
     "node": ">=18.0.0"
   }
 }
+
 

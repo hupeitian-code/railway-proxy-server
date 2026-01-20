@@ -364,37 +364,26 @@ function extractSharePointSiteFromFilePath(filePath: string): string {
 }
 
 export function filterStudentData(allData: StudentRow[], studentId: string): StudentRow[] {
-    // 常見的學生帳號欄位名稱
-    const possibleAccountFields = ['學生帳號', 'Student Account', 'studentAccount', 'account'];
+    // 將學生 ID 轉為小寫以便比對（不區分大小寫）
+    const lowerStudentId = studentId.toLowerCase().trim();
     
-    let accountField: string | null = null;
-    
-    // 找到學生帳號欄位
-    if (allData.length > 0) {
-        const sampleRow = allData[0];
-        for (const fieldName of possibleAccountFields) {
-            if (fieldName in sampleRow) {
-                accountField = fieldName;
-                break;
+    // 遍歷所有資料行，檢查每一行的所有欄位值
+    return allData.filter(row => {
+        // 遍歷該行的所有欄位
+        for (const [key, value] of Object.entries(row)) {
+            if (value === null || value === undefined) {
+                continue;
+            }
+            
+            // 將欄位值轉為字串並去除前後空格，然後轉為小寫
+            const valueStr = String(value).trim().toLowerCase();
+            
+            // 如果任何欄位值與學生 ID 匹配，即認定該行為學生的資料
+            if (valueStr === lowerStudentId) {
+                return true;
             }
         }
-    }
-
-    if (!accountField) {
-        console.warn('找不到學生帳號欄位，嘗試使用所有可能的欄位名稱');
-        // 如果找不到，嘗試使用第一個看起來像帳號的欄位
-        return [];
-    }
-
-    // 篩選該學生的資料（不區分大小寫）
-    const lowerStudentId = studentId.toLowerCase();
-    return allData.filter(row => {
-        const studentAccount = row[accountField!];
-        if (typeof studentAccount === 'string') {
-            return studentAccount.toLowerCase() === lowerStudentId;
-        } else if (typeof studentAccount === 'number') {
-            return String(studentAccount).toLowerCase() === lowerStudentId;
-        }
+        
         return false;
     });
 }
