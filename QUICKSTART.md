@@ -19,7 +19,7 @@ git add .
 git commit -m "Add Railway proxy server"
 
 # 推送到 GitHub（替換為您的儲存庫）
-git remote add origin https://github.com/SaintPauloSchool/railway-proxy-server.git
+git remote add origin https://github.com/lkw0102/railway-proxy-server.git
 git push -u origin main
 ```
 

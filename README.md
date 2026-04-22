@@ -14,7 +14,7 @@ cd railway-proxy-server
 git init
 git add .
 git commit -m "Initial commit: Railway proxy server"
-git remote add origin https://github.com/SaintPauloSchool/railway-proxy-server.git
+git remote add origin https://github.com/lkw0102/railway-proxy-server.git
 git push -u origin main
 ```
 
