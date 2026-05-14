@@ -23,6 +23,10 @@ export class AuthProvider {
             } else if (process.env.PROXY_USERNAME && process.env.PROXY_PASSWORD) {
                 // 回退到 UsernamePasswordCredential（需要應用程式設定為公開客戶端）
                 console.log('使用 UsernamePasswordCredential 認證（需要應用程式設定為公開客戶端）');
+                
+                const pwd = process.env.PROXY_PASSWORD || '';
+                console.log(`[Debug] 密碼長度: ${pwd.length}, 開頭: ${pwd[0]}, 結尾: ${pwd[pwd.length - 1]}`);
+                
                 this.credential = new UsernamePasswordCredential(
                     process.env.TENANT_ID,
                     process.env.CLIENT_ID,

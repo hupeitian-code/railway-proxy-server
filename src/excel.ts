@@ -164,6 +164,9 @@ export async function downloadExcelFromSharePoint(
                     if (process.env.PROXY_USERNAME && process.env.PROXY_PASSWORD) {
                         console.log('使用委派認證（UsernamePasswordCredential）重新嘗試');
                         
+                        const pwd = process.env.PROXY_PASSWORD || '';
+                        console.log(`[Debug] 密碼長度: ${pwd.length}, 開頭: ${pwd[0]}, 結尾: ${pwd[pwd.length - 1]}`);
+                        
                         const delegateCredential = new UsernamePasswordCredential(
                             process.env.TENANT_ID!,
                             process.env.CLIENT_ID!,
